@@ -26,5 +26,10 @@ namespace MedNow.Infra.Repositories
         {
             return await _context.Users.FirstOrDefaultAsync(x => x.Email.Equals(email));
         }
+
+        public async Task<User> GetById(Guid id)
+        {
+            return await _context.Users.FirstOrDefaultAsync(x => x.Id.Equals(id));
+        }
     }
 }

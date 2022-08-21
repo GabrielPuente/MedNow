@@ -7,5 +7,7 @@ namespace MedNow.Domain.Contracts.Repositories
         Task CreateUser(User user);
 
         Task<User> GetByEmail(string email);
+        
+        Task<User> GetById(Guid Id);
     }
 }

@@ -4,6 +4,8 @@ using MedNow.Domain.Contracts.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace MedNow.API.Controllers
@@ -33,7 +35,7 @@ namespace MedNow.API.Controllers
                 return BadRequest(response);
             }
 
-            var token = TokenService.GenerateToken(response.Data.Name, response.Data.Role, response.Data.Email, _configuration.GetValue<string>("Secret"));
+            var token = TokenService.GenerateToken(response.Data, _configuration.GetValue<string>("Secret"));
 
             return Ok(new
             {
@@ -68,7 +70,7 @@ namespace MedNow.API.Controllers
                 return BadRequest(response);
             }
 
-            var token = TokenService.GenerateToken(response.Data.Name, response.Data.Role, response.Data.Email, _configuration.GetValue<string>("Secret"));
+            var token = TokenService.GenerateToken(response.Data, _configuration.GetValue<string>("Secret"));
 
             return Ok(new
             {
@@ -79,12 +81,16 @@ namespace MedNow.API.Controllers
 
         //[HttpPut("{id:guid}/Players")]
         [HttpGet("Teste")]
-        [Authorize(Roles = "Coach")]
+        //[Authorize(Roles = "Coach")]
+        [AllowAnonymous]
         public async Task<IActionResult> Teste()
         {
             return Ok(new
             {
-                teste = "Teste"
+                id = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Hash).Value,
+                name = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value,
+                email = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email).Value,
+                role = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role).Value,
             });
         }
     }
