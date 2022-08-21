@@ -4,6 +4,7 @@ using MedNow.Infra;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MedNow.Infra.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220821180604_Add order orderItem adress and creditCard")]
+    partial class AddorderorderItemadressandcreditCard
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -235,8 +237,8 @@ namespace MedNow.Infra.Migrations
                                 .IsRequired()
                                 .HasColumnType("varchar(150)");
 
-                            b1.Property<long>("Number")
-                                .HasColumnType("bigint");
+                            b1.Property<int>("Number")
+                                .HasColumnType("int");
 
                             b1.HasKey("OrderId");
 

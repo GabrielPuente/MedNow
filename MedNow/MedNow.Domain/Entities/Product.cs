@@ -1,4 +1,6 @@
-﻿using MedNow.Domain.DefaultEntity;
+﻿using Flunt.Notifications;
+using Flunt.Validations;
+using MedNow.Domain.DefaultEntity;
 
 namespace MedNow.Domain.Entities
 {
@@ -26,6 +28,17 @@ namespace MedNow.Domain.Entities
             PromotionalPrice = promotionalPrice;
             ImagePath = imagePath;
             Description = description;
+
+            CheckDomainIsValid();
+        }
+
+        private void CheckDomainIsValid()
+        {
+            AddNotifications(new Contract<Notification>()
+                  .IsNotNullOrEmpty(Name, "Name", "Campo nome é obrigatorio")
+                  .IsNotNullOrEmpty(Description, "Description", "Descrição é invalido")
+                  .IsGreaterThan(Price, 0, "Price", "Valor precisa ser maior que 0")
+                  .IsNotNullOrEmpty(ImagePath, "ImagePath", "Caminho da imagem é obrigatorio"));
         }
     }
 }
