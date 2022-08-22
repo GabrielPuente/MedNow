@@ -55,38 +55,38 @@ namespace MedNow.API.Controllers
             return Ok(response);
         }
 
-        [HttpGet("Logar")]
-        public async Task<IActionResult> Logar()
-        {
-            var response = await _userService.LoginUser(new LoginUserCommand { Email = "gapuente96@gmail.com", Password = "123456" });
+        //[HttpGet("Logar")]
+        //public async Task<IActionResult> Logar()
+        //{
+        //    var response = await _userService.LoginUser(new LoginUserCommand { Email = "gapuente96@gmail.com", Password = "123456" });
 
-            if (!response.Valid)
-            {
-                return BadRequest(response);
-            }
+        //    if (!response.Valid)
+        //    {
+        //        return BadRequest(response);
+        //    }
 
-            var token = TokenService.GenerateToken(response.Data, _configuration.GetValue<string>("Secret"));
+        //    var token = TokenService.GenerateToken(response.Data, _configuration.GetValue<string>("Secret"));
 
-            return Ok(new
-            {
-                user = response.Data,
-                token
-            });
-        }
+        //    return Ok(new
+        //    {
+        //        user = response.Data,
+        //        token
+        //    });
+        //}
 
-        //[HttpPut("{id:guid}/Players")]
-        [HttpGet("Teste")]
-        //[Authorize(Roles = "Coach")]
-        [AllowAnonymous]
-        public async Task<IActionResult> Teste()
-        {
-            return Ok(new
-            {
-                id = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Hash).Value,
-                name = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value,
-                email = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email).Value,
-                role = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role).Value,
-            });
-        }
+        ////[HttpPut("{id:guid}/Players")]
+        //[HttpGet("Teste")]
+        ////[Authorize(Roles = "Coach")]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> Teste()
+        //{
+        //    return Ok(new
+        //    {
+        //        id = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Hash).Value,
+        //        name = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value,
+        //        email = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email).Value,
+        //        role = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role).Value,
+        //    });
+        //}
     }
 }

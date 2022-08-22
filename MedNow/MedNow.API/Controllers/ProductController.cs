@@ -6,7 +6,7 @@ namespace MedNow.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [AllowAnonymous]
     public class ProductController : ControllerBase
     {
         private readonly IProductQuery _productQuery;
