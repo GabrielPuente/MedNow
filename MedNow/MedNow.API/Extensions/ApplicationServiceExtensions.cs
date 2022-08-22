@@ -24,6 +24,7 @@ namespace MedNow.API.Extensions
         public static IServiceCollection AddQueries(this IServiceCollection services)
         {
             services.AddScoped<IProductQuery, ProductQuery>();
+            services.AddScoped<IOrderQuery, OrderQuery>();
             return services;
         }
 

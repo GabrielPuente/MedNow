@@ -3,15 +3,13 @@ using MedNow.Domain.Commands.User;
 using MedNow.Domain.Contracts.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace MedNow.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class UserController : ControllerBase
     {
         private readonly IConfiguration _configuration;
@@ -25,7 +23,6 @@ namespace MedNow.API.Controllers
 
         [HttpPost]
         [Route("login")]
-        [AllowAnonymous]
         public async Task<IActionResult> Authenticate(LoginUserCommand command)
         {
             var response = await _userService.LoginUser(command);
@@ -46,7 +43,6 @@ namespace MedNow.API.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         public async Task<IActionResult> Authenticate(CreateUserCommand command)
         {
             var response = await _userService.CreateUser(command);
@@ -60,7 +56,6 @@ namespace MedNow.API.Controllers
         }
 
         [HttpGet("Logar")]
-        [AllowAnonymous]
         public async Task<IActionResult> Logar()
         {
             var response = await _userService.LoginUser(new LoginUserCommand { Email = "gapuente96@gmail.com", Password = "123456" });
