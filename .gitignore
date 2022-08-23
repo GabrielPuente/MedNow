@@ -11,3 +11,12 @@
 /MedNow/MedNow.Application/bin/Debug/net6.0
 /MedNow/MedNow.Domain/bin/Debug/net6.0
 /MedNow/MedNow.Infra/bin/Debug/net6.0
+/MedNow.API/bin
+/MedNow.API/obj
+/MedNow.Application/bin
+/MedNow.Application/obj
+/MedNow.Domain/bin
+/MedNow.Domain/obj
+/MedNow.Infra/bin
+/MedNow.Infra/obj
+/.vs
