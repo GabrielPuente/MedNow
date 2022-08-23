@@ -25,7 +25,14 @@ namespace MedNow.API
 
             services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));
 
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                                        .AllowAnyMethod()
+                                        .AllowAnyHeader());
+            });
+
             services.AddControllers();
 
             services.AddAuthenticationServices(Configuration)
@@ -48,10 +55,7 @@ namespace MedNow.API
 
             app.UseRouting();
 
-            app.UseCors(x => x
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
+            app.UseCors("CorsPolicy");
 
             app.UseAuthentication();
             app.UseAuthorization();
