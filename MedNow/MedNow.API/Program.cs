@@ -1,11 +1,4 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using MedNow.API.Extensions;
 
 namespace MedNow.API
 {
@@ -13,7 +6,12 @@ namespace MedNow.API
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var webhost = CreateHostBuilder(args)
+             .Build();
+
+            webhost
+                   .MigrateContexts()
+                   .Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
