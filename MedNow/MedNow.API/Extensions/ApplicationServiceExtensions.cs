@@ -41,7 +41,8 @@ namespace MedNow.API.Extensions
         {
             services.AddScoped<IDbConnection, DbConnection>(provider =>
             {
-                string connectionString = configuration.GetConnectionString("Connection");
+                var connectionEncript = configuration.GetConnectionString("Connection");
+                var connectionString = Cryptography.Decrypt(connectionEncript);
                 return new SqlConnection(connectionString);
             });
 

@@ -20,8 +20,10 @@ namespace MedNow.API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionEncript = Configuration.GetConnectionString("Connection");
+            var connectionString = Cryptography.Decrypt(connectionEncript);
 
-            services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Connection")));
+            services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));
 
             services.AddCors();
             services.AddControllers();
