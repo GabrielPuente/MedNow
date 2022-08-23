@@ -1,4 +1,5 @@
 ﻿using MedNow.Domain.Entities;
+using System.Threading.Tasks;
 
 namespace MedNow.Domain.Contracts.Repositories
 {

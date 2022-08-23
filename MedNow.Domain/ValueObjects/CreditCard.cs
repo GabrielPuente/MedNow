@@ -1,4 +1,6 @@
-﻿namespace MedNow.Domain.ValueObjects
+﻿using System;
+
+namespace MedNow.Domain.ValueObjects
 {
     public class CreditCard
     {

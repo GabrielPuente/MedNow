@@ -1,4 +1,6 @@
 using MedNow.API.Extensions;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace MedNow.API
 {

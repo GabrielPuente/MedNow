@@ -1,6 +1,7 @@
 ﻿using MedNow.Domain.Contracts.Repositories;
 using MedNow.Domain.Entities;
 using MedNow.Infra.Auditing;
+using System.Threading.Tasks;
 
 namespace MedNow.Infra.Repositories
 {

@@ -3,7 +3,10 @@ using MedNow.Domain.Contracts.Queries;
 using MedNow.Domain.ViewModels;
 using SqlKata;
 using SqlKata.Compilers;
+using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace MedNow.Application.Queries
 {
@@ -38,7 +41,7 @@ namespace MedNow.Application.Queries
             query.WhereFalse("o.IsDeleted");
             query.Where("o.UserId", userId);
 
-            SqlServerCompiler compiler = new() { UseLegacyPagination = false };
+            SqlServerCompiler compiler = new SqlServerCompiler() { UseLegacyPagination = false };
             var sqlResult = compiler.Compile(query);
 
             return (List<ProductViewModel>)await _connection.QueryAsync<ProductViewModel>(sqlResult.Sql, param: sqlResult.NamedBindings);
@@ -66,7 +69,7 @@ namespace MedNow.Application.Queries
             query.WhereFalse("o.IsDeleted");
             query.Where("o.Id", id);
 
-            SqlServerCompiler compiler = new() { UseLegacyPagination = false };
+            SqlServerCompiler compiler = new SqlServerCompiler() { UseLegacyPagination = false };
             var sqlResult = compiler.Compile(query);
 
             return await _connection.QueryFirstOrDefaultAsync<ProductViewModel>(sqlResult.Sql, param: sqlResult.NamedBindings);

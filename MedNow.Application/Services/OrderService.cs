@@ -4,6 +4,7 @@ using MedNow.Domain.Contracts.Repositories;
 using MedNow.Domain.Contracts.Services;
 using MedNow.Domain.Entities;
 using MedNow.Domain.ValueObjects;
+using System.Threading.Tasks;
 
 namespace MedNow.Application.Services
 {

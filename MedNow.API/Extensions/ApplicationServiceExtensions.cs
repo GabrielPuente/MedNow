@@ -6,6 +6,8 @@ using MedNow.Domain.Contracts.Services;
 using MedNow.Infra.Auditing;
 using MedNow.Infra.Repositories;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using System.Data;
 using System.Data.Common;
 

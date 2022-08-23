@@ -1,6 +1,7 @@
 ﻿using MedNow.Domain.DefaultEntity;
 using MedNow.Infra.Constants;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 
 namespace MedNow.Infra.Extensions
 {
