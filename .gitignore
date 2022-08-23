@@ -1,0 +1,22 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/MedNow/.vs
+/MedNow/MedNow.API/bin/Debug/net6.0
+/MedNow/MedNow.API/obj
+/MedNow/MedNow.Application/obj
+/MedNow/MedNow.Domain/obj
+/MedNow/MedNow.Infra/obj
+/MedNow/MedNow.Application/bin/Debug/net6.0
+/MedNow/MedNow.Domain/bin/Debug/net6.0
+/MedNow/MedNow.Infra/bin/Debug/net6.0
+/MedNow.API/bin
+/MedNow.API/obj
+/MedNow.Application/bin
+/MedNow.Application/obj
+/MedNow.Domain/bin
+/MedNow.Domain/obj
+/MedNow.Infra/bin
+/MedNow.Infra/obj
+/.vs
