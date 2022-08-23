@@ -44,7 +44,7 @@ namespace MedNow.API
                 app.AddSwaggerApplications();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
