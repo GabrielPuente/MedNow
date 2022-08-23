@@ -44,7 +44,11 @@ namespace MedNow.API.Extensions
         public static IApplicationBuilder AddSwaggerApplications(this IApplicationBuilder app)
         {
             app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MedNow.Api v1"));
+            app.UseSwaggerUI(x =>
+            {
+                x.SwaggerEndpoint("/swagger/v1/swagger.json", "MedNow.Api v1");
+                x.RoutePrefix = string.Empty;
+            });
 
             return app;
         }
