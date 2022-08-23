@@ -2,6 +2,9 @@
 using Flunt.Validations;
 using MedNow.Domain.DefaultEntity;
 using MedNow.Domain.ValueObjects;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MedNow.Domain.Entities
 {
@@ -15,7 +18,7 @@ namespace MedNow.Domain.Entities
 
         public CreditCard CreditCard { get; private set; }
 
-        private readonly List<OrderItem> _orderItem = new();
+        private readonly List<OrderItem> _orderItem = new List<OrderItem>();
 
         public virtual IReadOnlyList<OrderItem> OrderItems => _orderItem.AsReadOnly();
 

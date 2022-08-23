@@ -1,6 +1,7 @@
 ﻿using Flunt.Notifications;
 using Flunt.Validations;
 using MedNow.Domain.DefaultEntity;
+using System;
 
 namespace MedNow.Domain.Entities
 {

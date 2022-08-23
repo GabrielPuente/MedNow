@@ -1,6 +1,7 @@
 ﻿using MedNow.Domain.Commands;
 using MedNow.Domain.Commands.User;
 using MedNow.Domain.Entities;
+using System.Threading.Tasks;
 
 namespace MedNow.Domain.Contracts.Services
 {

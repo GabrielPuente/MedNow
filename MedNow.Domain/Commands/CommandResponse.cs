@@ -1,4 +1,5 @@
 ﻿using Flunt.Notifications;
+using System.Collections.Generic;
 
 namespace MedNow.Domain.Commands
 {

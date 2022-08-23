@@ -4,7 +4,7 @@ namespace MedNow.Application.AuthenticationService
 {
     public static class PasswordService
     {
-        private static readonly ScryptEncoder encoder = new();
+        private static readonly ScryptEncoder encoder = new ScryptEncoder();
 
         public static string Encrypt(string password)
         {
