@@ -9,6 +9,6 @@ namespace MedNow.Domain.Contracts.Queries
     {
         Task<List<ProductViewModel>> Get(Guid userId);
 
-        Task<ProductViewModel> GetById(Guid id);
+        Task<List<ProductViewModel>> GetById(Guid id);
     }
 }

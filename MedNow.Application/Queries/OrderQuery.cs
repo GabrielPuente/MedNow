@@ -47,7 +47,7 @@ namespace MedNow.Application.Queries
             return (List<ProductViewModel>)await _connection.QueryAsync<ProductViewModel>(sqlResult.Sql, param: sqlResult.NamedBindings);
         }
 
-        public async Task<ProductViewModel> GetById(Guid id)
+        public async Task<List<ProductViewModel>> GetById(Guid id)
         {
             var query = new Query();
 
@@ -72,7 +72,7 @@ namespace MedNow.Application.Queries
             SqlServerCompiler compiler = new SqlServerCompiler() { UseLegacyPagination = false };
             var sqlResult = compiler.Compile(query);
 
-            return await _connection.QueryFirstOrDefaultAsync<ProductViewModel>(sqlResult.Sql, param: sqlResult.NamedBindings);
+            return (List<ProductViewModel>)await _connection.QueryAsync<ProductViewModel>(sqlResult.Sql, param: sqlResult.NamedBindings);
         }
     }
 }
