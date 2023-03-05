@@ -1,6 +1,6 @@
 ﻿using MedNow.Domain.Commands.Order;
-using MedNow.Domain.Contracts.Queries;
-using MedNow.Domain.Contracts.Services;
+using MedNow.Application.Contracts.Queries;
+using MedNow.Application.Contracts.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;

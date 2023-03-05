@@ -20,11 +20,6 @@ namespace MedNow.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionEncript = Configuration.GetConnectionString("Connection");
-            var connectionString = Cryptography.Decrypt(connectionEncript);
-
-            services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));
-
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
@@ -51,7 +46,7 @@ namespace MedNow.API
                 app.AddSwaggerApplications();
             }
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
             app.UseRouting();
 

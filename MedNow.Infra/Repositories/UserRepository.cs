@@ -1,4 +1,4 @@
-﻿using MedNow.Domain.Contracts.Repositories;
+﻿using MedNow.Infra.Contracts.Repositories;
 using MedNow.Domain.Entities;
 using MedNow.Infra.Auditing;
 using Microsoft.EntityFrameworkCore;

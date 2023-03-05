@@ -1,8 +1,8 @@
 ﻿using MedNow.Application.AuthenticationService;
 using MedNow.Domain.Commands;
 using MedNow.Domain.Commands.User;
-using MedNow.Domain.Contracts.Repositories;
-using MedNow.Domain.Contracts.Services;
+using MedNow.Infra.Contracts.Repositories;
+using MedNow.Application.Contracts.Services;
 using MedNow.Domain.Entities;
 using System.Threading.Tasks;
 

@@ -1,7 +1,7 @@
 ﻿using MedNow.Domain.Entities;
 using System.Threading.Tasks;
 
-namespace MedNow.Domain.Contracts.Repositories
+namespace MedNow.Infra.Contracts.Repositories
 {
     public interface IOrderRepository
     {
