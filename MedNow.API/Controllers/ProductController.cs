@@ -1,4 +1,4 @@
-﻿using MedNow.Domain.Contracts.Queries;
+﻿using MedNow.Application.Contracts.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;

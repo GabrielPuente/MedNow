@@ -1,5 +1,5 @@
 ﻿using Dapper;
-using MedNow.Domain.Contracts.Queries;
+using MedNow.Application.Contracts.Queries;
 using MedNow.Domain.ViewModels;
 using SqlKata;
 using SqlKata.Compilers;

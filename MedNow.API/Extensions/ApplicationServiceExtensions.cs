@@ -1,8 +1,8 @@
 ﻿using MedNow.Application.Queries;
 using MedNow.Application.Services;
-using MedNow.Domain.Contracts.Queries;
-using MedNow.Domain.Contracts.Repositories;
-using MedNow.Domain.Contracts.Services;
+using MedNow.Application.Contracts.Queries;
+using MedNow.Infra.Contracts.Repositories;
+using MedNow.Application.Contracts.Services;
 using MedNow.Infra.Auditing;
 using MedNow.Infra.Repositories;
 using Microsoft.Data.SqlClient;
@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Data;
 using System.Data.Common;
+using MedNow.Infra;
+using Microsoft.EntityFrameworkCore;
 
 namespace MedNow.API.Extensions
 {
@@ -41,17 +43,16 @@ namespace MedNow.API.Extensions
 
         public static IServiceCollection AddInfra(this IServiceCollection services, IConfiguration configuration)
         {
+            var connetcionstring = configuration.GetConnectionString();
+
+            services.AddDbContext<DataContext>(options => options.UseSqlServer(connetcionstring));
             services.AddScoped<IDbConnection, DbConnection>(provider =>
             {
-                var connectionEncript = configuration.GetConnectionString("Connection");
-                var connectionString = Cryptography.Decrypt(connectionEncript);
-                return new SqlConnection(connectionString);
+                return new SqlConnection(connetcionstring);
             });
 
             services.AddScoped<IEntryAuditor, EntryAuditor>();
-
             return services;
         }
-
     }
 }

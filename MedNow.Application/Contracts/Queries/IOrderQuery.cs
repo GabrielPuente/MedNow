@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MedNow.Domain.Contracts.Queries
+namespace MedNow.Application.Contracts.Queries
 {
     public interface IOrderQuery
     {

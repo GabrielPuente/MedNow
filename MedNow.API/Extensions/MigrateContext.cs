@@ -15,9 +15,7 @@ namespace MedNow.API.Extensions
 
             try
             {
-                var connectionEncript = configuration.GetConnectionString("Connection");
-                var connectionString = Cryptography.Decrypt(connectionEncript);
-
+                var connectionString = configuration.GetConnectionString();
                 var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
 
                 optionsBuilder.UseSqlServer(connectionString, options =>

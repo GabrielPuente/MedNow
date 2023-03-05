@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace MedNow.Domain.Contracts.Repositories
+namespace MedNow.Infra.Contracts.Repositories
 {
     public interface IProductRepository
     {
