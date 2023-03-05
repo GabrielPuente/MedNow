@@ -38,19 +38,5 @@ namespace MedNow.API.Extensions
 
             return services;
         }
-
-        public static IServiceCollection AddInfra(this IServiceCollection services, IConfiguration configuration)
-        {
-            var connetcionstring = configuration.GetConnectionString();
-
-            services.AddDbContext<DataContext>(options => options.UseSqlServer(connetcionstring));
-            services.AddScoped<IDbConnection, DbConnection>(provider =>
-            {
-                return new SqlConnection(connetcionstring);
-            });
-
-            services.AddScoped<IEntryAuditor, EntryAuditor>();
-            return services;
-        }
     }
 }

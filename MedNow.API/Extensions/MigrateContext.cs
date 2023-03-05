@@ -5,10 +5,8 @@ namespace MedNow.API.Extensions
 {
     public static class IWebHostExtensions
     {
-        public static IHost MigrateContexts(this IHost webHost)
+        public static IServiceCollection MigrateContexts(this IServiceCollection services, IConfiguration configuration)
         {
-            var configuration = webHost.Services.GetRequiredService<IConfiguration>();
-
             try
             {
                 var connectionString = configuration.GetConnectionString();
@@ -27,7 +25,7 @@ namespace MedNow.API.Extensions
                 throw;
             }
 
-            return webHost;
+            return services;
         }
     }
 }
