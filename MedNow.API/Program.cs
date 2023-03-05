@@ -1,6 +1,4 @@
 using MedNow.API.Extensions;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
 
 namespace MedNow.API
 {
@@ -8,19 +6,50 @@ namespace MedNow.API
     {
         public static void Main(string[] args)
         {
-            var webhost = CreateHostBuilder(args)
-             .Build();
+            var builder = WebApplication.CreateBuilder(args);
 
-            webhost
-                   .MigrateContexts()
-                   .Run();
+            // Add services to the container.
+
+            //builder.Services.AddCors(options =>
+            //{
+            //    options.AddPolicy("CorsPolicy",
+            //        builder => builder.AllowAnyOrigin()
+            //                            .AllowAnyMethod()
+            //                            .AllowAnyHeader());
+            //});
+
+            builder.Services.AddControllers();
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddEndpointsApiExplorer();
+
+            builder.Services
+                    .AddAuthenticationServices(builder.Configuration)
+                    .AddServices()
+                    .AddQueries()
+                    .AddRepositories()
+                    .AddInfra(builder.Configuration)
+                    .AddSwaggerServices();
+
+            var app = builder.Build();
+
+            // Configure the HTTP request pipeline.
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
+
+            app.UseHttpsRedirection();
+
+            //app.UseRouting();
+            //app.UseCors("CorsPolicy");
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.MapControllers();
+
+            app.Run();
         }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
     }
 }
