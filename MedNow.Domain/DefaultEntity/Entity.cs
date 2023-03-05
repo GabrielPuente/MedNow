@@ -1,5 +1,4 @@
 ﻿using Flunt.Notifications;
-using System;
 
 namespace MedNow.Domain.DefaultEntity
 {

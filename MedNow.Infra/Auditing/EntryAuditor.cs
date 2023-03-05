@@ -1,6 +1,5 @@
 ﻿using MedNow.Infra.Constants;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System;
 
 namespace MedNow.Infra.Auditing
 {

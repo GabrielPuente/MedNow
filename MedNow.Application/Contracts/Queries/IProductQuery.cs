@@ -1,7 +1,4 @@
 ﻿using MedNow.Domain.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace MedNow.Application.Contracts.Queries
 {

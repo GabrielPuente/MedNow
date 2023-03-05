@@ -3,8 +3,6 @@ using MedNow.Application.Contracts.Queries;
 using MedNow.Application.Contracts.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Threading.Tasks;
 
 namespace MedNow.API.Controllers
 {

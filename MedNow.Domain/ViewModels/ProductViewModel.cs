@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MedNow.Domain.ViewModels
+﻿namespace MedNow.Domain.ViewModels
 {
     public class ProductViewModel
     {

@@ -2,8 +2,6 @@
 using MedNow.Domain.Entities;
 using MedNow.Infra.Auditing;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Threading.Tasks;
 
 namespace MedNow.Infra.Repositories
 {

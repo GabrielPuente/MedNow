@@ -1,9 +1,5 @@
 ﻿using MedNow.Infra;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System;
 
 namespace MedNow.API.Extensions
 {

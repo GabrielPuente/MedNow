@@ -3,10 +3,7 @@ using MedNow.Application.Contracts.Queries;
 using MedNow.Domain.ViewModels;
 using SqlKata;
 using SqlKata.Compilers;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Threading.Tasks;
 
 namespace MedNow.Application.Queries
 {
