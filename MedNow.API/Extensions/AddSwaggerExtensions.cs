@@ -2,7 +2,7 @@
 
 namespace MedNow.API.Extensions
 {
-    public static class SwaggerExtensions
+    public static class AddSwaggerExtensions
     {
         public static IServiceCollection AddSwaggerServices(this IServiceCollection services)
         {

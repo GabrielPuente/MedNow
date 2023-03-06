@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MedNow.API.Extensions
 {
-    public static class DbContextExtensions
+    public static class AddDbContextExtensions
     {
         public static IServiceCollection AddDbContext(this IServiceCollection services, IConfiguration configuration)
         {

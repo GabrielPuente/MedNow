@@ -13,12 +13,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MedNow.API.Extensions
 {
-    public static class ApplicationServiceExtensions
+    public static class AddApplicationServiceExtensions
     {
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<ICachingService, CachingService>();
 
             return services;
         }

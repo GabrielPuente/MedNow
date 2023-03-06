@@ -7,7 +7,7 @@ using MedNow.Application.InternalEvent;
 
 namespace MedNow.API.Extensions
 {
-    public static class RebusExtensions
+    public static class AddRebusExtensions
     {
         public static IServiceCollection AddRebus(this IServiceCollection services, IConfiguration configuration)
         {
