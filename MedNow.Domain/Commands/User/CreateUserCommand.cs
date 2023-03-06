@@ -1,7 +1,6 @@
 ﻿using Flunt.Extensions.Br.Validations;
 using Flunt.Notifications;
 using Flunt.Validations;
-using System;
 
 namespace MedNow.Domain.Commands.User
 {

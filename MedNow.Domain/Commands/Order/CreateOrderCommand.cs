@@ -1,7 +1,5 @@
 ﻿using Flunt.Notifications;
 using Flunt.Validations;
-using System;
-using System.Collections.Generic;
 
 namespace MedNow.Domain.Commands.Order
 {

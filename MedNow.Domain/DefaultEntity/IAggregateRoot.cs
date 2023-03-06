@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MedNow.Domain.DefaultEntity
+﻿namespace MedNow.Domain.DefaultEntity
 {
     public interface IAggregateRoot
     {

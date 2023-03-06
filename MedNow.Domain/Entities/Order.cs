@@ -2,9 +2,6 @@
 using Flunt.Validations;
 using MedNow.Domain.DefaultEntity;
 using MedNow.Domain.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace MedNow.Domain.Entities
 {

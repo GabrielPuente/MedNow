@@ -1,4 +1,5 @@
 using MedNow.API.Extensions;
+using Rebus.Config;
 
 namespace MedNow.API
 {
@@ -7,7 +8,6 @@ namespace MedNow.API
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
             // Add services to the container.
 
             //builder.Services.AddCors(options =>
@@ -24,11 +24,13 @@ namespace MedNow.API
 
             builder.Services
                     .AddAuthenticationServices(builder.Configuration)
+                    .AddSwaggerServices()
                     .AddServices()
                     .AddQueries()
                     .AddRepositories()
-                    .AddInfra(builder.Configuration)
-                    .AddSwaggerServices();
+                    .AddRebus(builder.Configuration)
+                    .AddDbContext(builder.Configuration)
+                    .MigrateContexts(builder.Configuration);
 
             var app = builder.Build();
 
@@ -41,13 +43,14 @@ namespace MedNow.API
 
             app.UseHttpsRedirection();
 
-            //app.UseRouting();
             //app.UseCors("CorsPolicy");
 
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();
+
+            app.Services.UseRebus();
 
             app.Run();
         }

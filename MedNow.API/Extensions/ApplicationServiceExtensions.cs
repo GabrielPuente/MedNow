@@ -6,8 +6,6 @@ using MedNow.Application.Contracts.Services;
 using MedNow.Infra.Auditing;
 using MedNow.Infra.Repositories;
 using Microsoft.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using System.Data;
 using System.Data.Common;
 using MedNow.Infra;
@@ -38,20 +36,6 @@ namespace MedNow.API.Extensions
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
 
-            return services;
-        }
-
-        public static IServiceCollection AddInfra(this IServiceCollection services, IConfiguration configuration)
-        {
-            var connetcionstring = configuration.GetConnectionString();
-
-            services.AddDbContext<DataContext>(options => options.UseSqlServer(connetcionstring));
-            services.AddScoped<IDbConnection, DbConnection>(provider =>
-            {
-                return new SqlConnection(connetcionstring);
-            });
-
-            services.AddScoped<IEntryAuditor, EntryAuditor>();
             return services;
         }
     }

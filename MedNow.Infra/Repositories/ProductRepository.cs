@@ -1,8 +1,6 @@
 ﻿using MedNow.Infra.Contracts.Repositories;
 using MedNow.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Threading.Tasks;
 
 namespace MedNow.Infra.Repositories
 {
