@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MedNow.API.Extensions
 {
-    public static class AuthenticationServiceExtensions
+    public static class AddAuthenticationServiceExtensions
     {
         public static IServiceCollection AddAuthenticationServices(this IServiceCollection services, IConfiguration configuration)
         {

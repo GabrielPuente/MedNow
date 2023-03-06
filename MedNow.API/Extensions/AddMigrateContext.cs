@@ -5,7 +5,7 @@ namespace MedNow.API.Extensions
 {
     public static class IWebHostExtensions
     {
-        public static IServiceCollection MigrateContexts(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddMigrateContexts(this IServiceCollection services, IConfiguration configuration)
         {
             try
             {
