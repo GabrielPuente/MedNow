@@ -8,7 +8,7 @@ namespace CBF.Application.InternalEventHandler
       
         public async Task Handle(TestInternalEvent message)
         {
-         
+            throw new Exception(message.Nome);
         }
     }
 }
