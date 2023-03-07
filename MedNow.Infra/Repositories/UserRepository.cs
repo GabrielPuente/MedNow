@@ -1,7 +1,7 @@
-﻿using MedNow.Infra.Contracts.Repositories;
-using MedNow.Domain.Entities;
+﻿using MedNow.Domain.Entities;
 using MedNow.Infra.Auditing;
 using Microsoft.EntityFrameworkCore;
+using MedNow.Infra.Contracts;
 
 namespace MedNow.Infra.Repositories
 {

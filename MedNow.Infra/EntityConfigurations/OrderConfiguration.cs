@@ -51,24 +51,22 @@ namespace MedNow.Infra.EntityConfigurations
                 y.Property(x => x.Cvv).IsRequired();
             });
 
-            builder.OwnsMany(
-                       x => x.OrderItems,
-                       x =>
-                       {
-                           x.ToTable("OrderItem");
+            builder.OwnsMany(x => x.OrderItems, x =>
+            {
+                x.ToTable("OrderItem");
 
-                           x.HasKey(x => x.Id);
-                           x.Property(x => x.Id)
-                            .ValueGeneratedNever()
-                            .IsRequired();
+                x.HasKey(x => x.Id);
+                x.Property(x => x.Id)
+                .ValueGeneratedNever()
+                .IsRequired();
 
-                           x.HasOne(x => x.Product);
+                x.HasOne(x => x.Product);
 
-                           x.Property(x => x.Quantity).IsRequired();
-                           x.Property(x => x.TotalValue).IsRequired().HasDecimalPrecision();
+                x.Property(x => x.Quantity).IsRequired();
+                x.Property(x => x.TotalValue).IsRequired().HasDecimalPrecision();
 
-                           x.WithOwner().HasForeignKey("OrderId");
-                       });
+                x.WithOwner().HasForeignKey("OrderId");
+            });
         }
     }
 }

@@ -1,15 +1,9 @@
 ﻿using MedNow.Application.Queries;
 using MedNow.Application.Services;
 using MedNow.Application.Contracts.Queries;
-using MedNow.Infra.Contracts.Repositories;
 using MedNow.Application.Contracts.Services;
-using MedNow.Infra.Auditing;
 using MedNow.Infra.Repositories;
-using Microsoft.Data.SqlClient;
-using System.Data;
-using System.Data.Common;
-using MedNow.Infra;
-using Microsoft.EntityFrameworkCore;
+using MedNow.Infra.Contracts;
 
 namespace MedNow.API.Extensions
 {

@@ -7,16 +7,10 @@ namespace MedNow.Application.Services
     public class CachingService : ICachingService
     {
         private readonly IDistributedCache _cache;
-        private readonly DistributedCacheEntryOptions _options;
 
         public CachingService(IDistributedCache cache)
         {
             _cache = cache;
-            _options = new DistributedCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(3600),
-                SlidingExpiration = TimeSpan.FromSeconds(1200)
-            };
         }
 
         public async Task<string> GetAsync(string key)
@@ -26,7 +20,17 @@ namespace MedNow.Application.Services
 
         public async Task SetAsync(string key, object value)
         {
-            await _cache.SetStringAsync(key, JsonConvert.SerializeObject(value), _options);
+            await _cache.SetStringAsync(key, JsonConvert.SerializeObject(value), GetCacheOptions(1200, 3600));
+        }
+
+        private DistributedCacheEntryOptions GetCacheOptions(int slidingExpirationSecs, int absoluteExpirationSecs)
+        {
+            var cacheOptions = new DistributedCacheEntryOptions();
+
+            cacheOptions.SetSlidingExpiration(TimeSpan.FromSeconds(slidingExpirationSecs));
+            cacheOptions.SetAbsoluteExpiration(TimeSpan.FromSeconds(absoluteExpirationSecs));
+
+            return cacheOptions;
         }
     }
 }
