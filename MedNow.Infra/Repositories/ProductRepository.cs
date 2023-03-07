@@ -1,21 +1,13 @@
-﻿using MedNow.Infra.Contracts.Repositories;
-using MedNow.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using MedNow.Domain.Entities;
+using MedNow.Infra.Contracts;
+using MedNow.Infra.Auditing;
 
 namespace MedNow.Infra.Repositories
 {
-    public class ProductRepository : IProductRepository
+    public class ProductRepository : BaseRepository<Product>, IProductRepository
     {
-        private readonly DataContext _context;
-
-        public ProductRepository(DataContext context)
+        public ProductRepository(DataContext ctx, IEntryAuditor entryAuditor) : base(ctx, entryAuditor)
         {
-            _context = context;
-        }
-
-        public async Task<Product> GetById(Guid id)
-        {
-            return await _context.Products.FirstOrDefaultAsync(x => x.Id.Equals(id));
         }
     }
 }

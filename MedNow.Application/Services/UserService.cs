@@ -1,9 +1,9 @@
 ﻿using MedNow.Application.AuthenticationService;
 using MedNow.Domain.Commands;
 using MedNow.Domain.Commands.User;
-using MedNow.Infra.Contracts.Repositories;
 using MedNow.Application.Contracts.Services;
 using MedNow.Domain.Entities;
+using MedNow.Infra.Contracts;
 
 namespace MedNow.Application.Services
 {
