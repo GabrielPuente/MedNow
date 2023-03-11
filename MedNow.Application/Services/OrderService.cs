@@ -7,7 +7,7 @@ using MedNow.Infra.Contracts;
 
 namespace MedNow.Application.Services
 {
-    public class OrderService : IOrderService
+    public class OrderService : CommandHandler, IOrderService
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IUserRepository _userRepository;
@@ -26,7 +26,7 @@ namespace MedNow.Application.Services
 
             if (!command.IsValid)
             {
-                return new CommandResponse<Order>(null, command.Notifications);
+                return Fail<Order>(null, command.Notifications);
             }
 
             var user = await _userRepository.GetById(command.UserId);
@@ -35,9 +35,9 @@ namespace MedNow.Application.Services
 
             var order = new Order(user, creditCard, address);
 
-            if(!order.IsValid)
+            if (!order.IsValid)
             {
-                return new CommandResponse<Order>(null, order.Notifications);
+                return Fail<Order>(null, order.Notifications);
             }
 
             foreach (var item in command.Products)
@@ -47,7 +47,7 @@ namespace MedNow.Application.Services
 
                 if (!orderItem.IsValid)
                 {
-                    return new CommandResponse<Order>(null, orderItem.Notifications);
+                    return Fail<Order>(null, orderItem.Notifications);
                 }
 
                 order.AddOrderItem(orderItem);
@@ -55,7 +55,7 @@ namespace MedNow.Application.Services
 
             await _orderRepository.CreateOrder(order);
 
-            return new CommandResponse<Order>(order, order.Notifications);
+            return Ok(order, order.Notifications);
         }
     }
 }

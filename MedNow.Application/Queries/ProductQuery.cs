@@ -31,7 +31,7 @@ namespace MedNow.Application.Queries
 
             query.WhereFalse("IsDeleted");
              
-            SqlServerCompiler compiler = new SqlServerCompiler() { UseLegacyPagination = false };
+            var compiler = new SqlServerCompiler() { UseLegacyPagination = false };
             var sqlResult = compiler.Compile(query);
 
             return (List<ProductViewModel>)await _connection.QueryAsync<ProductViewModel>(sqlResult.Sql, param: sqlResult.NamedBindings);
@@ -55,7 +55,7 @@ namespace MedNow.Application.Queries
             query.Where("Id", id);
             query.WhereFalse("IsDeleted");
 
-            SqlServerCompiler compiler = new SqlServerCompiler() { UseLegacyPagination = false };
+            var compiler = new SqlServerCompiler() { UseLegacyPagination = false };
             var sqlResult = compiler.Compile(query);
 
             return await _connection.QueryFirstOrDefaultAsync<ProductViewModel>(sqlResult.Sql, param: sqlResult.NamedBindings);

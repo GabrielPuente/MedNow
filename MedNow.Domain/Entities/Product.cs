@@ -32,6 +32,17 @@ namespace MedNow.Domain.Entities
             CheckDomainIsValid();
         }
 
+        public void Update(string name, decimal price, decimal? promotionalPrice, string imagePath, string description)
+        {
+            Name = name;
+            Price = price;
+            PromotionalPrice = promotionalPrice;
+            ImagePath = imagePath;
+            Description = description;
+
+            CheckDomainIsValid();
+        }
+
         private void CheckDomainIsValid()
         {
             AddNotifications(new Contract<Notification>()

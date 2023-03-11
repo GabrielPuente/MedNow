@@ -15,7 +15,7 @@ namespace MedNow.Domain.Entities
 
         public CreditCard CreditCard { get; private set; }
 
-        private readonly List<OrderItem> _orderItem = new List<OrderItem>();
+        private readonly List<OrderItem> _orderItem = new();
 
         public virtual IReadOnlyList<OrderItem> OrderItems => _orderItem.AsReadOnly();
 

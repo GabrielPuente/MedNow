@@ -25,7 +25,7 @@ namespace MedNow.API.Controllers
         {
             var response = await _orderService.CreateOrder(command);
 
-            if (!response.Valid)
+            if (!response.IsValid)
             {
                 return BadRequest(response);
             }

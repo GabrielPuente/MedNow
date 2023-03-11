@@ -7,7 +7,7 @@ using MedNow.Infra.Contracts;
 
 namespace MedNow.Application.Services
 {
-    public class UserService : IUserService
+    public class UserService : CommandHandler, IUserService
     {
         private readonly IUserRepository _repository;
 
@@ -22,7 +22,7 @@ namespace MedNow.Application.Services
 
             if (!command.IsValid)
             {
-                return new CommandResponse<User>(null, command.Notifications);
+                return Fail<User>(null, command.Notifications);
             }
 
             var password = PasswordService.Encrypt(command.Password);
@@ -31,12 +31,12 @@ namespace MedNow.Application.Services
 
             if (!user.IsValid)
             {
-                return new CommandResponse<User>(null, user.Notifications);
+                return Fail<User>(null, user.Notifications);
             }
 
             await _repository.CreateUser(user);
 
-            return new CommandResponse<User>(user, user.Notifications);
+            return Ok<User>(user, user.Notifications);
         }
 
         public async Task<CommandResponse<User>> LoginUser(LoginUserCommand command)
@@ -45,7 +45,7 @@ namespace MedNow.Application.Services
 
             if (!command.IsValid)
             {
-                return new CommandResponse<User>(null, command.Notifications);
+                return Fail<User>(null, command.Notifications);
             }
 
             var user = await _repository.GetByEmail(command.Email);
@@ -53,7 +53,7 @@ namespace MedNow.Application.Services
             if (user is null)
             {
                 command.AddNotification("User", "Login ou senha invalida");
-                return new CommandResponse<User>(null, command.Notifications);
+                return Fail<User>(null, command.Notifications);
             }
 
             var areEqual = PasswordService.CheckPassword(command.Password, user.Password);
@@ -61,10 +61,10 @@ namespace MedNow.Application.Services
             if (!areEqual)
             {
                 command.AddNotification("User", "Login ou senha invalida");
-                return new CommandResponse<User>(null, command.Notifications);
+                return Fail<User>(null, command.Notifications);
             }
 
-            return new CommandResponse<User>(user, user.Notifications);
+            return Ok<User>(user, user.Notifications);
         }
     }
 }

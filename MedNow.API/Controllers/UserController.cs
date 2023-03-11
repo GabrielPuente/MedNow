@@ -26,7 +26,7 @@ namespace MedNow.API.Controllers
         {
             var response = await _userService.LoginUser(command);
 
-            if (!response.Valid)
+            if (!response.IsValid)
             {
                 return BadRequest(response);
             }
@@ -46,7 +46,7 @@ namespace MedNow.API.Controllers
         {
             var response = await _userService.CreateUser(command);
 
-            if (!response.Valid)
+            if (!response.IsValid)
             {
                 return BadRequest(response);
             }
