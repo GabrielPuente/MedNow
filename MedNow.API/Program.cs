@@ -30,7 +30,7 @@ namespace MedNow.API
                     .AddRepositories()
                     .AddRebus(builder.Configuration)
                     .AddDbContext(builder.Configuration)
-                    .AddMigrateContexts(builder.Configuration)
+                    //.AddMigrateContexts(builder.Configuration)
                     .AddRedis(builder.Configuration);
 
             var app = builder.Build();

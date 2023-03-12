@@ -7,23 +7,17 @@ namespace MedNow.API.Extensions
     {
         public static IServiceCollection AddMigrateContexts(this IServiceCollection services, IConfiguration configuration)
         {
-            try
-            {
-                var connectionString = configuration.GetConnectionString();
-                var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
 
-                optionsBuilder.UseSqlServer(connectionString, options =>
-                {
-                    options.MigrationsHistoryTable("__EFMigrationsHistory");
-                });
+            var connectionString = configuration.GetConnectionString();
+            var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
 
-                var dataContext = new DataContext(optionsBuilder.Options);
-                dataContext.Database.Migrate();
-            }
-            catch (Exception ex)
+            optionsBuilder.UseSqlServer(connectionString, options =>
             {
-                throw;
-            }
+                options.MigrationsHistoryTable("__EFMigrationsHistory");
+            });
+
+            var dataContext = new DataContext(optionsBuilder.Options);
+            dataContext.Database.Migrate();
 
             return services;
         }

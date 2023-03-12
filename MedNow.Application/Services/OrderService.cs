@@ -30,10 +30,7 @@ namespace MedNow.Application.Services
             }
 
             var user = await _userRepository.GetById(command.UserId);
-            var creditCard = new CreditCard(command.CreditCard.Number, command.CreditCard.Name, command.CreditCard.Cvv, command.CreditCard.ExpirationDate);
-            var address = new Address(command.Address.ZipCode, command.Address.Street, command.Address.Number, command.Address.Neighborhood, command.Address.City, command.Address.State);
-
-            var order = new Order(user, creditCard, address);
+            var order = new Order(user);
 
             if (!order.IsValid)
             {

@@ -23,34 +23,6 @@ namespace MedNow.Infra.EntityConfigurations
 
             builder.Property(x => x.TotalValue).IsRequired().HasDecimalPrecision();
 
-            builder.OwnsOne(x => x.Address, y =>
-            {
-                y.ToTable("Address");
-
-                y.HasKey(x => x.OrderId);
-                y.WithOwner().HasForeignKey(x => x.OrderId);
-
-                y.Property(x => x.ZipCode).HasVarchar(9).IsRequired();
-                y.Property(x => x.Street).HasVarchar(150).IsRequired();
-                y.Property(x => x.Number).IsRequired();
-                y.Property(x => x.Neighborhood).IsRequired().HasVarchar(100);
-                y.Property(x => x.City).IsRequired().HasVarchar(100);
-                y.Property(x => x.State).IsRequired().HasVarchar(50);
-            });
-
-            builder.OwnsOne(x => x.CreditCard, y =>
-            {
-                y.ToTable("CreditCard");
-
-                y.HasKey(x => x.OrderId);
-                y.WithOwner().HasForeignKey(x => x.OrderId);
-
-                y.Property(x => x.Number).IsRequired();
-                y.Property(x => x.Name).HasVarchar(150).IsRequired();
-                y.Property(x => x.ExpirationDate).IsRequired();
-                y.Property(x => x.Cvv).IsRequired();
-            });
-
             builder.OwnsMany(x => x.OrderItems, x =>
             {
                 x.ToTable("OrderItem");

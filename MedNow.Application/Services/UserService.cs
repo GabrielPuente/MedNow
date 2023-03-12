@@ -4,6 +4,7 @@ using MedNow.Domain.Commands.User;
 using MedNow.Application.Contracts.Services;
 using MedNow.Domain.Entities;
 using MedNow.Infra.Contracts;
+using MedNow.Domain.ValueObjects;
 
 namespace MedNow.Application.Services
 {
@@ -26,8 +27,10 @@ namespace MedNow.Application.Services
             }
 
             var password = PasswordService.Encrypt(command.Password);
+            var creditCard = new CreditCard(command.CreditCard.Number, command.CreditCard.Name, command.CreditCard.Cvv, command.CreditCard.ExpirationDate);
+            var address = new Address(command.Address.ZipCode, command.Address.Street, command.Address.Number, command.Address.Neighborhood, command.Address.City, command.Address.State);
 
-            var user = new User(command.Name, command.BirthDate, command.Cpf, command.Email, password, command.Role);
+            var user = new User(command.Name, command.BirthDate, command.Cpf, command.Email, password, command.Role, creditCard, address);
 
             if (!user.IsValid)
             {

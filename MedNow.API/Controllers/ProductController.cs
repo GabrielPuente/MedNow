@@ -1,7 +1,6 @@
 ﻿using MedNow.Application.Contracts.Queries;
 using MedNow.Application.Contracts.Services;
 using MedNow.Domain.Commands.Product;
-using MedNow.Infra.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
