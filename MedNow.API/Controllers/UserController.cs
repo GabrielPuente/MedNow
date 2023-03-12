@@ -20,8 +20,7 @@ namespace MedNow.API.Controllers
             _userService = userService;
         }
 
-        [HttpPost]
-        [Route("login")]
+        [HttpPost("login")]
         public async Task<IActionResult> Authenticate(LoginUserCommand command)
         {
             var response = await _userService.LoginUser(command);
@@ -35,14 +34,15 @@ namespace MedNow.API.Controllers
 
             return Ok(new
             {
-                user = response.Data,
+                userName = response.Data.Name,
+                userEmail = response.Data.Email,
                 token
             });
 
         }
 
         [HttpPost]
-        public async Task<IActionResult> Authenticate(CreateUserCommand command)
+        public async Task<IActionResult> Post(CreateUserCommand command)
         {
             var response = await _userService.CreateUser(command);
 
@@ -54,24 +54,20 @@ namespace MedNow.API.Controllers
             return Ok(response);
         }
 
-        //[HttpGet("Logar")]
-        //public async Task<IActionResult> Logar()
-        //{
-        //    var response = await _userService.LoginUser(new LoginUserCommand { Email = "gapuente96@gmail.com", Password = "123456" });
+        [HttpGet("Login")]
+        public async Task<IActionResult> Login()
+        {
+            var response = await _userService.LoginUser(new LoginUserCommand { Email = "gapuente96@gmail.com", Password = "123456" });
 
-        //    if (!response.Valid)
-        //    {
-        //        return BadRequest(response);
-        //    }
+            if (!response.IsValid)
+            {
+                return BadRequest(response);
+            }
 
-        //    var token = TokenService.GenerateToken(response.Data, _configuration.GetValue<string>("Secret"));
+            var token = TokenService.GenerateToken(response.Data, _configuration.GetValue<string>("Secret"));
 
-        //    return Ok(new
-        //    {
-        //        user = response.Data,
-        //        token
-        //    });
-        //}
+            return Ok(token);
+        }
 
         ////[HttpPut("{id:guid}/Players")]
         //[HttpGet("Teste")]
