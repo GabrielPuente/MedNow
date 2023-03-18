@@ -10,5 +10,10 @@ namespace MedNow.Domain.DefaultEntity
         {
             Id = Guid.NewGuid();
         }
+
+        protected virtual void CheckDomainIsValid()
+        {
+
+        }
     }
 }

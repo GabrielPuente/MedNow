@@ -1,5 +1,5 @@
-﻿using MedNow.Domain.Commands;
-using MedNow.Domain.Commands.Product;
+﻿using MedNow.Application.Commands;
+using MedNow.Application.Commands.Product;
 using MedNow.Domain.Entities;
 
 namespace MedNow.Application.Contracts.Services

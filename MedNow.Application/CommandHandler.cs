@@ -1,5 +1,5 @@
 ﻿using Flunt.Notifications;
-using MedNow.Domain.Commands;
+using MedNow.Application.Commands;
 
 namespace MedNow.Application
 {

@@ -2,7 +2,7 @@
 using Flunt.Notifications;
 using Flunt.Validations;
 
-namespace MedNow.Domain.Commands.User
+namespace MedNow.Application.Commands.User
 {
     public class CreateUserCommand : Command
     {

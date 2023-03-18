@@ -24,7 +24,7 @@ namespace MedNow.Domain.Entities
             CheckDomainIsValid();
         }
 
-        private void CheckDomainIsValid()
+        protected override void CheckDomainIsValid()
         {
             AddNotifications(new Contract<Notification>()
                   .IsGreaterOrEqualsThan(OrderItems.Count, 1, "Itens", "Itens no carrinho deve ser maior que 1"));

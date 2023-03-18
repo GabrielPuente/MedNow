@@ -1,5 +1,5 @@
 ﻿using MedNow.Application.AuthenticationService;
-using MedNow.Domain.Commands.User;
+using MedNow.Application.Commands.User;
 using MedNow.Application.Contracts.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

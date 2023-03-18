@@ -1,8 +1,8 @@
-﻿using MedNow.Domain.Commands;
+﻿using MedNow.Application.Commands;
 using MedNow.Application.Contracts.Services;
 using MedNow.Domain.Entities;
 using MedNow.Infra.Contracts;
-using MedNow.Domain.Commands.Product;
+using MedNow.Application.Commands.Product;
 using Flunt.Notifications;
 
 namespace MedNow.Application.Services
@@ -25,7 +25,7 @@ namespace MedNow.Application.Services
                 return new CommandResponse<Product>(null, command.Notifications);
             }
 
-            var product = new Product(command.Name, command.Price, command.PromotionalPrice, command.ImagePath, command.Description);
+            var product = new Product(command.Name, command.Price, command.PromotionalPrice, command.ImagePath, command.Description, command.InStock);
 
             if (!product.IsValid)
             {
@@ -56,7 +56,7 @@ namespace MedNow.Application.Services
                 return Fail<Product>("Produto não encontrado.", command.Notifications);
             }
 
-            product.Update(command.Name, command.Price, command.PromotionalPrice, command.ImagePath, command.Description);
+            product.Update(command.Name, command.Price, command.PromotionalPrice, command.ImagePath, command.Description, command.InStock);
 
             if (!product.IsValid)
                 return Fail<Product>("Erro ao atualizar o produto.", product.Notifications);

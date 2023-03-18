@@ -1,7 +1,7 @@
 ﻿using Flunt.Notifications;
 using Flunt.Validations;
 
-namespace MedNow.Domain.Commands.Order
+namespace MedNow.Application.Commands.Order
 {
     public class CreateOrderCommand : Command
     {

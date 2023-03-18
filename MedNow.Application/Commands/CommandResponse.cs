@@ -1,6 +1,6 @@
 ﻿using Flunt.Notifications;
 
-namespace MedNow.Domain.Commands
+namespace MedNow.Application.Commands
 {
     public class CommandResponse
     {

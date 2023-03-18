@@ -1,6 +1,6 @@
 ﻿using MedNow.Application.Contracts.Queries;
 using MedNow.Application.Contracts.Services;
-using MedNow.Domain.Commands.Product;
+using MedNow.Application.Commands.Product;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +18,20 @@ namespace MedNow.API.Controllers
         {
             _productQuery = productQuery;
             _productService = productService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var response = await _productQuery.Get();
+            return Ok(response);
+        }
+
+        [HttpGet("{id:guid}")]
+        public async Task<IActionResult> GetById(Guid id)
+        {
+            var response = await _productQuery.GetById(id);
+            return Ok(response);
         }
 
         [HttpPost]
@@ -56,20 +70,6 @@ namespace MedNow.API.Controllers
                 return BadRequest(response);
             }
 
-            return Ok(response);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Get()
-        {
-            var response = await _productQuery.Get();
-            return Ok(response);
-        }
-
-        [HttpGet("{id:guid}")]
-        public async Task<IActionResult> GetById(Guid id)
-        {
-            var response = await _productQuery.GetById(id);
             return Ok(response);
         }
     }

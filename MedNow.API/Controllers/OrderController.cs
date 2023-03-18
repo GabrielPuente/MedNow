@@ -1,4 +1,4 @@
-﻿using MedNow.Domain.Commands.Order;
+﻿using MedNow.Application.Commands.Order;
 using MedNow.Application.Contracts.Queries;
 using MedNow.Application.Contracts.Services;
 using Microsoft.AspNetCore.Authorization;

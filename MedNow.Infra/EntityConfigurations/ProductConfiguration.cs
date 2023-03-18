@@ -24,6 +24,7 @@ namespace MedNow.Infra.EntityConfigurations
             builder.Property(x => x.PromotionalPrice).IsRequired(false).HasDecimalPrecision();
             builder.Property(x => x.ImagePath).IsRequired().HasVarchar(150);
             builder.Property(x => x.Description).IsRequired().HasVarchar(500);
+            builder.Property(x => x.InStock).IsRequired();
         }
     }
 }

@@ -46,7 +46,7 @@ namespace MedNow.Domain.Entities
             CheckDomainIsValid();
         }
 
-        private void CheckDomainIsValid()
+        protected override void CheckDomainIsValid()
         {
             AddNotifications(new Contract<Notification>()
                   .IsNotNullOrEmpty(Name, "Name", "Campo nome é obrigatorio")

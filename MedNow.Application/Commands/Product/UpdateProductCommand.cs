@@ -1,7 +1,7 @@
 ﻿using Flunt.Notifications;
 using Flunt.Validations;
 
-namespace MedNow.Domain.Commands.Product
+namespace MedNow.Application.Commands.Product
 {
     public class UpdateProductCommand : Command
     {
@@ -17,6 +17,8 @@ namespace MedNow.Domain.Commands.Product
 
         public string Description { get; set; }
 
+        public ushort InStock { get; set; }
+
         public override void Validate()
         {
             AddNotifications(new Contract<Notification>()
@@ -24,6 +26,8 @@ namespace MedNow.Domain.Commands.Product
                  .IsNotNullOrEmpty(Name, "Name", "Nome do produto é obrigatorio")
                  .IsGreaterThan(Price, 0, "Price", "Valor do produto é obrigatorio")
                  .IsNotNullOrEmpty(ImagePath, "ImagePath", "Imagem para o produto é obrigatorio")
+                  .IsGreaterThan(InStock, 0, "InStock", "Quantidade em estoque deve ser maior que zero")
+                 .IsLowerThan(InStock, 65.000, "InStock", "Quantidade em estoque deve ser menor que 65.000")
                  .IsNotNullOrEmpty(Description, "Description", "Descricao do produto é obrigatorio"));
         }
     }

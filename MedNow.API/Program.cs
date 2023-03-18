@@ -1,4 +1,6 @@
+using MediatR;
 using MedNow.API.Extensions;
+using MedNow.Application;
 using Rebus.Config;
 
 namespace MedNow.API
@@ -21,7 +23,7 @@ namespace MedNow.API
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-
+                   
             builder.Services
                     .AddAuthenticationServices(builder.Configuration)
                     .AddSwaggerServices()
@@ -31,7 +33,8 @@ namespace MedNow.API
                     .AddRebus(builder.Configuration)
                     .AddDbContext(builder.Configuration)
                     //.AddMigrateContexts(builder.Configuration)
-                    .AddRedis(builder.Configuration);
+                    .AddRedis(builder.Configuration)
+                    .AddMediatR(x => x.RegisterServicesFromAssemblies(typeof(ApplicationModule).Assembly));
 
             var app = builder.Build();
 
