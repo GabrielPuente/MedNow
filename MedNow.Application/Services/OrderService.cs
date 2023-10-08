@@ -1,5 +1,5 @@
-﻿using MedNow.Domain.Commands;
-using MedNow.Domain.Commands.Order;
+﻿using MedNow.Application.Commands;
+using MedNow.Application.Commands.Order;
 using MedNow.Application.Contracts.Services;
 using MedNow.Domain.Entities;
 using MedNow.Domain.ValueObjects;
@@ -7,7 +7,7 @@ using MedNow.Infra.Contracts;
 
 namespace MedNow.Application.Services
 {
-    public class OrderService : IOrderService
+    public class OrderService : CommandHandler, IOrderService
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IUserRepository _userRepository;
@@ -26,18 +26,15 @@ namespace MedNow.Application.Services
 
             if (!command.IsValid)
             {
-                return new CommandResponse<Order>(null, command.Notifications);
+                return Fail<Order>(null, command.Notifications);
             }
 
             var user = await _userRepository.GetById(command.UserId);
-            var creditCard = new CreditCard(command.CreditCard.Number, command.CreditCard.Name, command.CreditCard.Cvv, command.CreditCard.ExpirationDate);
-            var address = new Address(command.Address.ZipCode, command.Address.Street, command.Address.Number, command.Address.Neighborhood, command.Address.City, command.Address.State);
+            var order = new Order(user);
 
-            var order = new Order(user, creditCard, address);
-
-            if(!order.IsValid)
+            if (!order.IsValid)
             {
-                return new CommandResponse<Order>(null, order.Notifications);
+                return Fail<Order>(null, order.Notifications);
             }
 
             foreach (var item in command.Products)
@@ -47,7 +44,7 @@ namespace MedNow.Application.Services
 
                 if (!orderItem.IsValid)
                 {
-                    return new CommandResponse<Order>(null, orderItem.Notifications);
+                    return Fail<Order>(null, orderItem.Notifications);
                 }
 
                 order.AddOrderItem(orderItem);
@@ -55,7 +52,7 @@ namespace MedNow.Application.Services
 
             await _orderRepository.CreateOrder(order);
 
-            return new CommandResponse<Order>(order, order.Notifications);
+            return Ok(order, order.Notifications);
         }
     }
 }

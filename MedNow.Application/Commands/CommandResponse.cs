@@ -1,6 +1,6 @@
 ﻿using Flunt.Notifications;
 
-namespace MedNow.Domain.Commands
+namespace MedNow.Application.Commands
 {
     public class CommandResponse
     {
@@ -17,9 +17,7 @@ namespace MedNow.Domain.Commands
 
         public IReadOnlyCollection<Notification> Notifications { get; protected set; }
 
-        public bool Valid => Notifications == null || Notifications.Count == 0;
-
-        public bool Invalid => Notifications != null && Notifications.Count != 0;
+        public bool IsValid => Notifications == null || Notifications.Count == 0;
 
         public string Message { get; private set; }
     }

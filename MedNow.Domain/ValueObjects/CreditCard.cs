@@ -2,7 +2,7 @@
 {
     public class CreditCard
     {
-        public Guid OrderId { get; private set; }
+        public Guid UserId { get; private set; }
 
         public long Number { get; set; }
 
@@ -20,9 +20,9 @@
             ExpirationDate = expirationDate;
         }
 
-        public void SetOrderId(Guid orderId)
+        public void SetUserId(Guid userId)
         {
-            OrderId = orderId;
+            UserId = userId;
         }
     }
 }

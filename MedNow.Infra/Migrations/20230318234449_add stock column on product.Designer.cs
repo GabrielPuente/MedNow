@@ -12,17 +12,18 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MedNow.Infra.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220821180604_Add order orderItem adress and creditCard")]
-    partial class AddorderorderItemadressandcreditCard
+    [Migration("20230318234449_add stock column on product")]
+    partial class addstockcolumnonproduct
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.8")
+                .HasAnnotation("ProductVersion", "7.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, (int)1L, 1);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("MedNow.Domain.Entities.Order", b =>
                 {
@@ -72,6 +73,9 @@ namespace MedNow.Infra.Migrations
                     b.Property<string>("ImagePath")
                         .IsRequired()
                         .HasColumnType("varchar(150)");
+
+                    b.Property<int>("InStock")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -186,9 +190,16 @@ namespace MedNow.Infra.Migrations
                             b1.Navigation("Product");
                         });
 
+                    b.Navigation("OrderItems");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MedNow.Domain.Entities.User", b =>
+                {
                     b.OwnsOne("MedNow.Domain.ValueObjects.Address", "Address", b1 =>
                         {
-                            b1.Property<Guid>("OrderId")
+                            b1.Property<Guid>("UserId")
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<string>("City")
@@ -214,17 +225,17 @@ namespace MedNow.Infra.Migrations
                                 .IsRequired()
                                 .HasColumnType("varchar(9)");
 
-                            b1.HasKey("OrderId");
+                            b1.HasKey("UserId");
 
                             b1.ToTable("Address", (string)null);
 
                             b1.WithOwner()
-                                .HasForeignKey("OrderId");
+                                .HasForeignKey("UserId");
                         });
 
                     b.OwnsOne("MedNow.Domain.ValueObjects.CreditCard", "CreditCard", b1 =>
                         {
-                            b1.Property<Guid>("OrderId")
+                            b1.Property<Guid>("UserId")
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<int>("Cvv")
@@ -237,15 +248,15 @@ namespace MedNow.Infra.Migrations
                                 .IsRequired()
                                 .HasColumnType("varchar(150)");
 
-                            b1.Property<int>("Number")
-                                .HasColumnType("int");
+                            b1.Property<long>("Number")
+                                .HasColumnType("bigint");
 
-                            b1.HasKey("OrderId");
+                            b1.HasKey("UserId");
 
                             b1.ToTable("CreditCard", (string)null);
 
                             b1.WithOwner()
-                                .HasForeignKey("OrderId");
+                                .HasForeignKey("UserId");
                         });
 
                     b.Navigation("Address")
@@ -253,10 +264,6 @@ namespace MedNow.Infra.Migrations
 
                     b.Navigation("CreditCard")
                         .IsRequired();
-
-                    b.Navigation("OrderItems");
-
-                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

@@ -23,7 +23,7 @@ namespace MedNow.Application.Services
             await _cache.SetStringAsync(key, JsonConvert.SerializeObject(value), GetCacheOptions(1200, 3600));
         }
 
-        private DistributedCacheEntryOptions GetCacheOptions(int slidingExpirationSecs, int absoluteExpirationSecs)
+        private static DistributedCacheEntryOptions GetCacheOptions(int slidingExpirationSecs, int absoluteExpirationSecs)
         {
             var cacheOptions = new DistributedCacheEntryOptions();
 

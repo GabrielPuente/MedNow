@@ -26,6 +26,34 @@ namespace MedNow.Infra.EntityConfigurations
             builder.Property(x => x.Email).IsRequired().HasVarchar(100);
             builder.Property(x => x.BirthDate).IsRequired();
 
+            builder.OwnsOne(x => x.Address, y =>
+            {
+                y.ToTable("Address");
+
+                y.HasKey(x => x.UserId);
+                y.WithOwner().HasForeignKey(x => x.UserId);
+
+                y.Property(x => x.ZipCode).HasVarchar(9).IsRequired();
+                y.Property(x => x.Street).HasVarchar(150).IsRequired();
+                y.Property(x => x.Number).IsRequired();
+                y.Property(x => x.Neighborhood).IsRequired().HasVarchar(100);
+                y.Property(x => x.City).IsRequired().HasVarchar(100);
+                y.Property(x => x.State).IsRequired().HasVarchar(50);
+            });
+
+            builder.OwnsOne(x => x.CreditCard, y =>
+            {
+                y.ToTable("CreditCard");
+
+                y.HasKey(x => x.UserId);
+                y.WithOwner().HasForeignKey(x => x.UserId);
+
+                y.Property(x => x.Number).IsRequired();
+                y.Property(x => x.Name).HasVarchar(150).IsRequired();
+                y.Property(x => x.ExpirationDate).IsRequired();
+                y.Property(x => x.Cvv).IsRequired();
+            });
+
             builder.HasIndex(x => x.Email);
         }
     }

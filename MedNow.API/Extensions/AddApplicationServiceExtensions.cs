@@ -14,6 +14,7 @@ namespace MedNow.API.Extensions
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<ICachingService, CachingService>();
+            services.AddScoped<IProductService, ProductService>();
 
             return services;
         }

@@ -8,12 +8,14 @@ namespace MedNow.Infra.Contracts
 
         Task<T> GetById(Guid id, bool trackEntities = true);
 
-        Task<bool> Add(T entity);
+        Task Add(T entity);
 
-        Task<bool> Update(T entity);
+        void Update(T entity);
 
-        Task Delete(T entity);
+        void Delete(T entity);
 
-        Task SaveChanges();
+        Task Commit();
+
+        Task Rollback();
     }
 }

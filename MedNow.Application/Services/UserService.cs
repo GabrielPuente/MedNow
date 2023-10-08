@@ -1,13 +1,14 @@
 ﻿using MedNow.Application.AuthenticationService;
-using MedNow.Domain.Commands;
-using MedNow.Domain.Commands.User;
+using MedNow.Application.Commands;
+using MedNow.Application.Commands.User;
 using MedNow.Application.Contracts.Services;
 using MedNow.Domain.Entities;
 using MedNow.Infra.Contracts;
+using MedNow.Domain.ValueObjects;
 
 namespace MedNow.Application.Services
 {
-    public class UserService : IUserService
+    public class UserService : CommandHandler, IUserService
     {
         private readonly IUserRepository _repository;
 
@@ -22,21 +23,23 @@ namespace MedNow.Application.Services
 
             if (!command.IsValid)
             {
-                return new CommandResponse<User>(null, command.Notifications);
+                return Fail<User>(null, command.Notifications);
             }
 
             var password = PasswordService.Encrypt(command.Password);
+            var creditCard = new CreditCard(command.CreditCard.Number, command.CreditCard.Name, command.CreditCard.Cvv, command.CreditCard.ExpirationDate);
+            var address = new Address(command.Address.ZipCode, command.Address.Street, command.Address.Number, command.Address.Neighborhood, command.Address.City, command.Address.State);
 
-            var user = new User(command.Name, command.BirthDate, command.Cpf, command.Email, password, command.Role);
+            var user = new User(command.Name, command.BirthDate, command.Cpf, command.Email, password, command.Role, creditCard, address);
 
             if (!user.IsValid)
             {
-                return new CommandResponse<User>(null, user.Notifications);
+                return Fail<User>(null, user.Notifications);
             }
 
             await _repository.CreateUser(user);
 
-            return new CommandResponse<User>(user, user.Notifications);
+            return Ok<User>(user, user.Notifications);
         }
 
         public async Task<CommandResponse<User>> LoginUser(LoginUserCommand command)
@@ -45,7 +48,7 @@ namespace MedNow.Application.Services
 
             if (!command.IsValid)
             {
-                return new CommandResponse<User>(null, command.Notifications);
+                return Fail<User>(null, command.Notifications);
             }
 
             var user = await _repository.GetByEmail(command.Email);
@@ -53,7 +56,7 @@ namespace MedNow.Application.Services
             if (user is null)
             {
                 command.AddNotification("User", "Login ou senha invalida");
-                return new CommandResponse<User>(null, command.Notifications);
+                return Fail<User>(null, command.Notifications);
             }
 
             var areEqual = PasswordService.CheckPassword(command.Password, user.Password);
@@ -61,10 +64,10 @@ namespace MedNow.Application.Services
             if (!areEqual)
             {
                 command.AddNotification("User", "Login ou senha invalida");
-                return new CommandResponse<User>(null, command.Notifications);
+                return Fail<User>(null, command.Notifications);
             }
 
-            return new CommandResponse<User>(user, user.Notifications);
+            return Ok<User>(user, user.Notifications);
         }
     }
 }

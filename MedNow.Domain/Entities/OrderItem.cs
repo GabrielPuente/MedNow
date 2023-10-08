@@ -29,7 +29,7 @@ namespace MedNow.Domain.Entities
             CheckDomainIsValid();
         }
 
-        private void CheckDomainIsValid()
+        protected override void CheckDomainIsValid()
         {
             AddNotifications(new Contract<Notification>()
                   .IsNotEmpty(OrderId, "Name", "Campo nome é obrigatorio")

@@ -23,10 +23,13 @@ namespace MedNow.Infra.Repositories
         {
             if (trackEntities)
             {
-                return await _set.ToListAsync();
+                return await _set
+                    .Where(x => !EF.Property<bool>(x, "IsDeleted"))
+                    .ToListAsync();
             }
 
             return await _set
+                .Where(x => !EF.Property<bool>(x, "IsDeleted"))
                 .AsNoTracking()
                 .ToListAsync();
         }
@@ -36,39 +39,39 @@ namespace MedNow.Infra.Repositories
             IQueryable<T> query = null;
             query = trackEntities ? _set : _set.AsNoTracking();
 
-            return await query.FirstOrDefaultAsync(x => x.Id == id);
+            return await query
+                .Where(x => !EF.Property<bool>(x, "IsDeleted"))
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public virtual async Task<bool> Add(T entity)
+        public virtual async Task Add(T entity)
         {
             _entryAuditor.AuditCreate(_context.Entry(entity));
             await _set.AddAsync(entity);
-
-            return true;
         }
 
-        public virtual Task<bool> Update(T entity)
+        public virtual void Update(T entity)
         {
             _entryAuditor.AuditUpdate(_context.Entry(entity));
             _set.Update(entity);
-
-            return Task.FromResult(true);
         }
 
-        public virtual Task Delete(T entity)
+        public virtual void Delete(T entity)
         {
             var entityEntry = _context.Entry(entity);
 
             entityEntry.Property(Columns.IS_DELETED).CurrentValue = true;
 
             _entryAuditor.AuditDelete(entityEntry);
-
-            return Task.CompletedTask;
         }
 
-        public async Task SaveChanges()
+        public async Task Commit()
         {
             await _context.SaveChangesAsync();
+        }
+
+        public async Task Rollback()
+        {
         }
     }
 }

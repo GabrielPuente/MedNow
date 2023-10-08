@@ -1,4 +1,4 @@
-﻿using MedNow.Domain.Commands.Order;
+﻿using MedNow.Application.Commands.Order;
 using MedNow.Application.Contracts.Queries;
 using MedNow.Application.Contracts.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -25,7 +25,7 @@ namespace MedNow.API.Controllers
         {
             var response = await _orderService.CreateOrder(command);
 
-            if (!response.Valid)
+            if (!response.IsValid)
             {
                 return BadRequest(response);
             }
