@@ -1,3 +1,4 @@
+using IdempotentAPI.Cache.DistributedCache.Extensions.DependencyInjection;
 using MediatR;
 using MedNow.API.Extensions;
 using MedNow.Application;
@@ -10,7 +11,6 @@ namespace MedNow.API
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            // Add services to the container.
 
             //builder.Services.AddCors(options =>
             //{
@@ -21,9 +21,8 @@ namespace MedNow.API
             //});
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-                   
+
             builder.Services
                     .AddAuthenticationServices(builder.Configuration)
                     .AddSwaggerServices()
@@ -32,13 +31,14 @@ namespace MedNow.API
                     .AddRepositories()
                     .AddRebus(builder.Configuration)
                     .AddDbContext(builder.Configuration)
-                    //.AddMigrateContexts(builder.Configuration)
+                    .AddMigrateContexts(builder.Configuration)
                     .AddRedis(builder.Configuration)
+                    .AddDistributedMemoryCache()
+                    .AddIdempotentAPIUsingDistributedCache()
                     .AddMediatR(x => x.RegisterServicesFromAssemblies(typeof(ApplicationModule).Assembly));
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();

@@ -45,7 +45,7 @@ namespace MedNow.Application.Services
 
             if (!command.IsValid)
             {
-                return new CommandResponse<Product>(null, command.Notifications);
+                return Fail<Product>("Valide as informacoes", command.Notifications);
             }
 
             var product = await _repository.GetById(id);
@@ -75,7 +75,7 @@ namespace MedNow.Application.Services
             {
                 var notifications = new List<Notification>
                 {
-                    new Notification() { Key = "Produto", Message = "Produto nao localizado" }
+                    new() { Key = "Produto", Message = "Produto nao localizado" }
                 };
                 return Fail<Product>("Erro ao atualizar o produto.", notifications.AsReadOnly());
             }

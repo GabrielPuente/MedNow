@@ -2,7 +2,6 @@
 using MedNow.Application.Commands.Order;
 using MedNow.Application.Contracts.Services;
 using MedNow.Domain.Entities;
-using MedNow.Domain.ValueObjects;
 using MedNow.Infra.Contracts;
 
 namespace MedNow.Application.Services
@@ -49,7 +48,7 @@ namespace MedNow.Application.Services
 
                 order.AddOrderItem(orderItem);
             }
-
+            
             await _orderRepository.CreateOrder(order);
 
             return Ok(order, order.Notifications);

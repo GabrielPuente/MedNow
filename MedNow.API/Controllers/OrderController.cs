@@ -13,23 +13,30 @@ namespace MedNow.API.Controllers
     {
         private readonly IOrderService _orderService;
         private readonly IOrderQuery _orderQuery;
+        private readonly ICachingService _cache;
 
-        public OrderController(IOrderService orderService, IOrderQuery orderQuery)
+        public OrderController(IOrderService orderService, IOrderQuery orderQuery, ICachingService cache)
         {
             _orderService = orderService;
             _orderQuery = orderQuery;
+            _cache = cache;
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(CreateOrderCommand command)
         {
+            //IDEMPOTENCIA
+            var cache = await _cache.GetAsync(string.Concat(command.UserId, "+", string.Join('+', command.Products.Select(x => x.Id).ToString())));
+            if (!string.IsNullOrEmpty(cache))
+                return Ok(cache);
+
             var response = await _orderService.CreateOrder(command);
 
             if (!response.IsValid)
-            {
                 return BadRequest(response);
-            }
 
+            await _cache.SetAsync(string.Concat(command.UserId, "+", string.Join('+', command.Products.Select(x => x.Id).ToString())), response);
+            
             return Ok(response);
         }
 

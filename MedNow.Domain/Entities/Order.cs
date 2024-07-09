@@ -21,7 +21,6 @@ namespace MedNow.Domain.Entities
         public Order(User user)
         {
             User = user;
-            CheckDomainIsValid();
         }
 
         protected override void CheckDomainIsValid()
