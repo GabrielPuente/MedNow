@@ -68,20 +68,5 @@ namespace MedNow.API.Controllers
 
             return Ok(token);
         }
-
-        ////[HttpPut("{id:guid}/Players")]
-        //[HttpGet("Teste")]
-        ////[Authorize(Roles = "Coach")]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> Teste()
-        //{
-        //    return Ok(new
-        //    {
-        //        id = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Hash).Value,
-        //        name = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value,
-        //        email = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email).Value,
-        //        role = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role).Value,
-        //    });
-        //}
     }
 }

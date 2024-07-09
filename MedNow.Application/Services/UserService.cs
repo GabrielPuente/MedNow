@@ -47,9 +47,7 @@ namespace MedNow.Application.Services
             command.Validate();
 
             if (!command.IsValid)
-            {
                 return Fail<User>(null, command.Notifications);
-            }
 
             var user = await _repository.GetByEmail(command.Email);
 
